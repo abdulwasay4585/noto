@@ -8,22 +8,6 @@ import {
 import { fetchCategories, fetchResources } from '../api';
 import ResourceCard from '../components/ResourceCard';
 
-// ─── Animated cream bar — replicates logo's bar motif ──────────────────────
-function HeroBar({ delay, height }: { delay: number; height: number }) {
-  return (
-    <motion.div
-      initial={{ scaleY: 0, opacity: 0 }}
-      animate={{ scaleY: 1, opacity: 1 }}
-      transition={{ delay, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      className="w-5 md:w-7 rounded-full origin-bottom"
-      style={{
-        height: `${height}%`,
-        backgroundColor: 'var(--noto-accent)',
-        opacity: 0.25,
-      }}
-    />
-  );
-}
 
 const categoryIcons: Record<string, React.ElementType> = {
   'O Level': GraduationCap,
@@ -76,12 +60,7 @@ export default function Home() {
         className="relative overflow-hidden"
         style={{ backgroundColor: 'var(--noto-primary)' }}
       >
-        {/* Animated bar background — logo motif */}
-        <div className="absolute inset-0 flex items-end justify-center gap-3 pb-0 pointer-events-none select-none overflow-hidden">
-          {[55, 72, 85, 100, 90, 78, 65, 50, 68, 82, 95, 75, 60, 48, 70].map((h, i) => (
-            <HeroBar key={i} height={h} delay={0.05 * i} />
-          ))}
-        </div>
+
 
         {/* Subtle bottom gradient to blend bars into content */}
         <div
@@ -111,7 +90,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.08] mb-6"
+            className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.08] mb-6 drop-shadow-xl"
             style={{ color: '#ffffff', fontFamily: 'Space Grotesk, sans-serif' }}
           >
             Elite Curated{' '}
@@ -122,8 +101,8 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.7 }}
-            className="text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed"
-            style={{ color: 'rgba(255,255,255,0.75)' }}
+            className="text-lg md:text-xl max-w-2xl mx-auto mb-10 font-medium leading-relaxed drop-shadow-md"
+            style={{ color: 'rgba(255,255,255,0.95)' }}
           >
             Strictly curated notes, authoritative past papers, and premium study tools for O Level, A Level, and SAT scholars.
           </motion.p>
