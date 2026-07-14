@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: production_password_here
+      POSTGRES_DB: noto_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    restart: unless-stopped
+
+volumes:
+  pgdata:

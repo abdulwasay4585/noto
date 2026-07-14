@@ -1,0 +1,45 @@
+services:
+  db:
+    image: ankane/pgvector:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: noto_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/init.sql
+
+  web:
+    image: php:8.2-apache
+    env_file:
+      - .env
+    volumes:
+      - ./api:/var/www/html/api
+    ports:
+      - "8000:80"
+    command: >
+      bash -c "
+      apt-get update && apt-get install -y libpq-dev &&
+      docker-php-ext-install pdo pdo_pgsql pgsql &&
+      a2enmod rewrite &&
+      apache2-foreground
+      "
+
+  data-pipeline:
+    build: 
+      context: ./services/data-pipeline
+    env_file:
+      - .env
+    volumes:
+      - ./services/data-pipeline:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    # We will use 'docker compose run --rm data-pipeline node backfill.js' 
+    # to run this, so the default command can just be a sleep or bash.
+    command: tail -f /dev/null
+
+volumes:
+  pgdata:

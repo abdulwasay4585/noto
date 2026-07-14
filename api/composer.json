@@ -1,0 +1,8 @@
+{
+    "name": "noto/api",
+    "description": "NOTO API",
+    "type": "project",
+    "require": {
+        "firebase/php-jwt": "^7.1"
+    }
+}

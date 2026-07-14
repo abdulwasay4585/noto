@@ -1,0 +1,147 @@
+/* ─── Font Imports — must be first @import statements ────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ─── Raw Design Tokens (light mode defaults) ─────────────────────────────── */
+:root {
+  --noto-primary:        #1278B0;
+  --noto-primary-dark:   #0B5A87;
+  --noto-primary-light:  #5FA8D3;
+  --noto-accent:         #F2EAD3;
+  --noto-accent-dark:    #D9C99A;
+  --noto-background:     #FAFAF7;
+  --noto-surface:        #FFFFFF;
+  --noto-surface-alt:    #F1F1EC;
+  --noto-text-primary:   #1E2530;
+  --noto-text-secondary: #5A6472;
+  --noto-border:         #E2E2DC;
+  --noto-success:        #4CAF7D;
+  --noto-warning:        #E0A458;
+  --noto-danger:         #D9534F;
+  --noto-accent-text:    #1E2530;
+
+  --noto-radius-sm: 0.375rem;
+  --noto-radius-md: 0.5rem;
+  --noto-radius-lg: 1rem;
+  --noto-radius-xl: 1.5rem;
+}
+
+/* ─── Dark Mode Overrides ─────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --noto-primary:        #3D9BD6;
+  --noto-primary-dark:   #1278B0;
+  --noto-primary-light:  #6FB8E0;
+  --noto-accent:         #F2EAD3;
+  --noto-accent-dark:    #C9B97E;
+  --noto-background:     #14181F;
+  --noto-surface:        #1E2530;
+  --noto-surface-alt:    #262D3A;
+  --noto-text-primary:   #F4F4F1;
+  --noto-text-secondary: #A0A8B5;
+  --noto-border:         #323A48;
+  --noto-success:        #5FC495;
+  --noto-warning:        #E8B872;
+  --noto-danger:         #E3716C;
+  --noto-accent-text:    #14181F;
+}
+
+/* ─── Tailwind v4 Theme Mapping ───────────────────────────────────────────── */
+@theme {
+  /* Colors — map Tailwind utilities to runtime CSS vars */
+  --color-primary:        var(--noto-primary);
+  --color-primary-dark:   var(--noto-primary-dark);
+  --color-primary-light:  var(--noto-primary-light);
+  --color-accent:         var(--noto-accent);
+  --color-accent-dark:    var(--noto-accent-dark);
+  --color-background:     var(--noto-background);
+  --color-surface:        var(--noto-surface);
+  --color-surface-alt:    var(--noto-surface-alt);
+  --color-text-primary:   var(--noto-text-primary);
+  --color-text-secondary: var(--noto-text-secondary);
+  --color-border:         var(--noto-border);
+  --color-success:        var(--noto-success);
+  --color-warning:        var(--noto-warning);
+  --color-danger:         var(--noto-danger);
+
+  /* Typography */
+  --font-sans:    'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+}
+
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--noto-background);
+  color: var(--noto-text-primary);
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth theme transitions — only for color/background, not layout */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    fill 0.2s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ─── Component Classes ───────────────────────────────────────────────────── */
+.btn-primary {
+  background-color: var(--noto-primary);
+  color: #ffffff;
+  border-radius: var(--noto-radius-md);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  padding: 0.625rem 1.25rem;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+.btn-primary:hover {
+  background-color: var(--noto-primary-dark);
+}
+
+.btn-secondary {
+  background-color: var(--noto-accent);
+  color: var(--noto-text-primary);
+  border-radius: var(--noto-radius-md);
+  font-weight: 500;
+  padding: 0.625rem 1.25rem;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-secondary:hover {
+  background-color: var(--noto-accent-dark);
+}
+
+.card {
+  background-color: var(--noto-surface);
+  border: 1px solid var(--noto-border);
+  border-radius: var(--noto-radius-lg);
+  padding: 1.5rem;
+}
+
+/* ─── Text Selection ──────────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--noto-primary);
+  color: #ffffff;
+}
