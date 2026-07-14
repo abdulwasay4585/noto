@@ -13,6 +13,15 @@ require_once __DIR__ . '/controllers/ActivityLogController.php';
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
+function getGeminiApiKey() {
+    $apiKey = getenv('GEMINI_API_KEY');
+    if (!$apiKey && file_exists(__DIR__ . '/../.env')) {
+        $env = @parse_ini_file(__DIR__ . '/../.env');
+        $apiKey = $env['GEMINI_API_KEY'] ?? null;
+    }
+    return $apiKey;
+}
+
 header('Content-Type: application/json');
 // Allow CORS
 header("Access-Control-Allow-Origin: *");
@@ -326,8 +335,8 @@ try {
         $resource = $stmt->fetch();
         if (!$resource) sendError('Resource not found', 404);
 
-        $apiKey = getenv('GEMINI_API_KEY');
-        if (!$apiKey) sendError('Gemini API key not configured on server', 500);
+        $apiKey = getGeminiApiKey();
+        if (!$apiKey) sendError('Gemini API key not configured', 500);
 
         $prompt = "Summarize the following academic resource in a formal, structured, and highly professional manner for an elite student. Focus on key learning outcomes and precise coverage. Keep the summary concise, strictly under 150 words.\n\n" .
                   "Title: " . $resource['title'] . "\n" .
@@ -437,7 +446,7 @@ try {
         finfo_close($finfo);
         if (!$mime) $mime = $file['type'];
 
-        $apiKey = getenv('GEMINI_API_KEY');
+        $apiKey = getGeminiApiKey();
         if (!$apiKey) sendError('Gemini API key not configured', 500);
         
         $uploadUrl = "https://generativelanguage.googleapis.com/upload/v1beta/files?key=" . $apiKey;
@@ -488,7 +497,7 @@ try {
         $stmt = $pdo->prepare("INSERT INTO chat_messages (session_id, role, content, attached_file_uri, attached_file_mime) VALUES (?, 'user', ?, ?, ?)");
         $stmt->execute([$chatSessionId, $content, $fileUri, $fileMime]);
 
-        $apiKey = getenv('GEMINI_API_KEY');
+        $apiKey = getGeminiApiKey();
         if (!$apiKey) sendError('Gemini API key not configured', 500);
 
         // RAG: embed question and find similar resources
@@ -670,12 +679,8 @@ try {
         $subjectName = $stmt->fetchColumn();
         if (!$subjectName) sendError('Subject not found');
 
-        $apiKey = getenv('GEMINI_API_KEY');
-        if (!$apiKey && file_exists(__DIR__ . '/../.env')) {
-            $env = parse_ini_file(__DIR__ . '/../.env');
-            $apiKey = $env['GEMINI_API_KEY'] ?? null;
-        }
-        if (!$apiKey) sendError('Gemini API key not configured on server', 500);
+        $apiKey = getGeminiApiKey();
+        if (!$apiKey) sendError('Gemini API key not configured', 500);
 
         $topicsStr = !empty($topics) ? " Focus SPECIFICALLY on the following topics: " . implode(', ', $topics) . "." : "";
 

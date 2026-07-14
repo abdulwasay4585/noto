@@ -70,7 +70,8 @@ We already have a `Dockerfile.prod` configured in the project. This brilliant co
    - `DB_USER` = *(your neon user)*
    - `DB_PASS` = *(your neon password)*
    - `DB_PORT` = `5432`
-   - `JWT_SECRET` = *(Generate a random long string for security, e.g., `my-super-secret-production-key`)*
+   - `JWT_SECRET` = *(Generate a random long string for security)*
+   - `GEMINI_API_KEY` = *(your Gemini API key)*
 7. Click **Create Web Service**.
 
 ---
