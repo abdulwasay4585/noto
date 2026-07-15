@@ -121,7 +121,11 @@ try {
         sendJson(['status' => 'ok', 'timestamp' => date('c')]);
     }
 
-    // Legacy auth routes removed; now handled by AuthController at the bottom of the file.
+    // Handled by explicit router setup if possible
+    require_once __DIR__ . '/routes.php';
+    if ($router->dispatch($method, $path)) {
+        // Handled by router
+    }
 
     if ($path === 'categories' && $method === 'GET') {
         $stmt = $pdo->query('SELECT * FROM categories ORDER BY id ASC');

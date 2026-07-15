@@ -77,20 +77,69 @@ CREATE TABLE IF NOT EXISTS tutor_profiles (
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS tutor_classes (
-    id SERIAL PRIMARY KEY,
-    tutor_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    title VARCHAR(255) NOT NULL,
-    description TEXT,
-    schedule TEXT,
-    price DECIMAL(10,2) DEFAULT 0,
-    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS tutor_courses (
+  id SERIAL PRIMARY KEY,
+  tutor_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  description TEXT,
+  price DECIMAL(10,2) DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS tutor_enrollments (
-    id SERIAL PRIMARY KEY,
-    class_id INTEGER NOT NULL REFERENCES tutor_classes(id) ON DELETE CASCADE,
-    student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    enrolled_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(class_id, student_id)
+  id SERIAL PRIMARY KEY,
+  tutor_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  course_id INTEGER REFERENCES tutor_courses(id) ON DELETE SET NULL,
+  fee_paid BOOLEAN DEFAULT FALSE,
+  payment_ref TEXT,
+  payment_method TEXT DEFAULT 'jazzcash',
+  payment_status TEXT DEFAULT 'pending',
+  enrolled_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(tutor_id, student_id, course_id)
+);
+
+CREATE TABLE IF NOT EXISTS tutor_videos (
+  id SERIAL PRIMARY KEY,
+  course_id INTEGER NOT NULL REFERENCES tutor_courses(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  youtube_url TEXT NOT NULL,
+  description TEXT,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS tutor_readings (
+  id SERIAL PRIMARY KEY,
+  course_id INTEGER NOT NULL REFERENCES tutor_courses(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  content TEXT,
+  file_url TEXT,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS tutor_classes (
+  id SERIAL PRIMARY KEY,
+  tutor_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  course_id INTEGER REFERENCES tutor_courses(id) ON DELETE SET NULL,
+  title TEXT NOT NULL,
+  description TEXT,
+  platform TEXT DEFAULT 'zoom',
+  meeting_link TEXT NOT NULL,
+  scheduled_at TIMESTAMPTZ NOT NULL,
+  duration_minutes INTEGER DEFAULT 60,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS tutor_announcements (
+  id SERIAL PRIMARY KEY,
+  tutor_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  course_id INTEGER REFERENCES tutor_courses(id) ON DELETE SET NULL,
+  title TEXT NOT NULL,
+  body TEXT,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS student_last_online (
+  user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+  last_seen TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );

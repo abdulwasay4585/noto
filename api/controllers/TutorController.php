@@ -73,6 +73,4 @@ class TutorController {
         $this->pdo->prepare("UPDATE tutor_profiles SET bio=?,subjects=?,hourly_rate=? WHERE user_id=?")->execute([$b['bio']??'',$b['subjects']??'',$b['hourly_rate']??0,$user['id']]);
         sendJson(['ok'=>true]);
     }
-    
-    // Additional methods will be added for courses, classes, etc.
 }

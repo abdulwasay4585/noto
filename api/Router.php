@@ -76,7 +76,7 @@ class Router {
             }
         }
         
-        // 404 Not Found
-        sendError('Not Found', 404);
+        // Return false so legacy router can take over
+        return false;
     }
 }

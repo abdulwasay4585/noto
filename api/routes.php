@@ -14,10 +14,20 @@ $router->get('/tutor/dashboard', 'TutorController@dashboard');
 $router->get('/tutor/profile', 'TutorController@getProfile');
 $router->put('/tutor/profile', 'TutorController@updateProfile');
 
-// Dispatch
-$uri = $_SERVER['REQUEST_URI'];
-$method = $_SERVER['REQUEST_METHOD'];
+// We will call dispatch in index.php
+// Student routes
+require_once __DIR__ . '/controllers/StudentController.php';
+$router->get('/student/my-tutors', 'StudentController@myTutors');
+$router->get('/student/courses', 'StudentController@courses');
+$router->get('/student/available-courses', 'StudentController@availableCourses');
+$router->post('/student/enroll', 'StudentController@enroll');
+$router->post('/student/payment', 'StudentController@payment');
+$router->get('/student/classes', 'StudentController@classes');
+$router->get('/student/announcements', 'StudentController@announcements');
 
-// We can return true if a route was found, or false if we want index.php to handle it.
-// For now, if the router handles it, it will output JSON and exit (since controllers call sendJson).
-// We should modify Router dispatch to return boolean so index.php knows.
+// Resource routes
+require_once __DIR__ . '/controllers/ResourceController.php';
+$router->get('/categories', 'ResourceController@getCategories');
+$router->get('/subjects', 'ResourceController@getSubjects');
+$router->get('/resources', 'ResourceController@getResources');
+$router->get('/resources/{id}', 'ResourceController@getResource');
