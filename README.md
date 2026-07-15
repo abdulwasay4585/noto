@@ -70,11 +70,3 @@ The project includes a Dockerfile.prod configured to bundle both the React front
 
 For a step by step guide on how to deploy this entire platform for free, please read the deployment.md file.
 
-## Default Credentials
-
-If you just seeded a fresh database, you can log in to the admin panel using the default credentials:
-
-* Email: admin@noto.com
-* Password: noto-admin
-
-(Please make sure to change this in production!)
