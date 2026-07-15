@@ -86,7 +86,7 @@ class AuthController {
 
         // Login by email only (no username or is_active column in schema)
         $stmt = $this->pdo->prepare(
-            "SELECT * FROM users WHERE email = ?"
+            "SELECT id, email, password_hash, role, first_name, last_name, phone_number FROM users WHERE email = ?"
         );
         $stmt->execute([$identifier]);
         $user = $stmt->fetch();
