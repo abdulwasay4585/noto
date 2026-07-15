@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   BookOpen, Home, Info, ShieldCheck, Sun, Moon, Menu, X,
-  MessageCircle, FileStack, Map, Layers, ClipboardCheck, BarChart3, Users, LogIn, User, GraduationCap
+  MessageCircle, FileStack, Map, Layers, ClipboardCheck, BarChart3, Users, LogIn, User, GraduationCap, LogOut
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { toggleTheme, getTheme } from '../lib/theme';

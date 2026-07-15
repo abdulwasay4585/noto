@@ -70,9 +70,9 @@ export default function SignIn() {
         <AnimatePresence>
           {error && (
             <motion.div
-              initial={{ opacity: 0, height: 0, mb: 0 }}
-              animate={{ opacity: 1, height: 'auto', mb: 20 }}
-              exit={{ opacity: 0, height: 0, mb: 0 }}
+              initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+              animate={{ opacity: 1, height: 'auto', marginBottom: 20 }}
+              exit={{ opacity: 0, height: 0, marginBottom: 0 }}
               className="flex items-center gap-2 p-3 rounded-xl text-sm"
               style={{ backgroundColor: '#ef444415', color: '#ef4444' }}
             >

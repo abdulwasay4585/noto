@@ -148,7 +148,7 @@ export default function TutorVideos() {
                             <a href={v.youtube_url} target="_blank" rel="noreferrer" className="text-xs hover:underline flex items-center gap-1" style={{ color: '#ef4444' }}>
                               Watch on YouTube <ExternalLink size={12} />
                             </a>
-                            <button onClick={() => handleDeleteVideo(v.id)} className="p-1.5 rounded-md hover:bg-white/10 transition-colors" style={{ color: '#ef4444' }} title="Delete">
+                            <button onClick={() => handleDelete(v.id)} className="p-1.5 rounded-md hover:bg-white/10 transition-colors" style={{ color: '#ef4444' }} title="Delete">
                               <Trash2 size={14} />
                             </button>
                           </div>
