@@ -149,9 +149,7 @@ export default function Flashcards() {
                     borderColor: 'var(--noto-border)',
                   }}
                 >
-                  {current.topic && (
-                    
-                  )}
+
                   <p className="text-lg font-semibold leading-snug"
                     style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
                     {current.front}
