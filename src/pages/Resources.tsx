@@ -84,12 +84,7 @@ export default function Resources() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
         <div>
-          <p
-            className="text-xs font-semibold uppercase tracking-widest mb-2"
-            style={{ color: 'var(--noto-primary)' }}
-          >
-            The Archive
-          </p>
+
           <h1
             className="text-4xl md:text-5xl font-bold tracking-tight"
             style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}

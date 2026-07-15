@@ -1,6 +1,7 @@
 // src/pages/admin/PastPaperManager.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 import { Upload, ExternalLink, Plus } from 'lucide-react';
+import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 import { fetchPastPapers, addPastPaper } from '../../api';
 import { parseDriveUrl } from '../../lib/gdrive';
@@ -57,9 +58,10 @@ export default function PastPaperManager() {
         session: 'May/June', paper_number: 1,
         question_paper_url: '', mark_scheme_url: '',
       });
+      toast.success('Paper added successfully!');
       setShowForm(false);
     } catch (err) {
-      alert('Failed to add paper');
+      toast.error('Failed to add paper');
     } finally {
       setSaving(false);
     }

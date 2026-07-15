@@ -81,9 +81,7 @@ export default function Roadmap() {
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-2">
           <Map size={15} style={{ color: 'var(--noto-primary)' }} />
-          <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--noto-primary)' }}>
-            Study Planner
-          </span>
+          
         </div>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight"
           style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>

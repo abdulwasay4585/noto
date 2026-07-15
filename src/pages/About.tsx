@@ -19,9 +19,7 @@ export default function About() {
       {/* Label */}
       <div className="flex items-center gap-2 mb-2">
         <BookOpen size={15} style={{ color: 'var(--noto-primary)' }} />
-        <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--noto-primary)' }}>
-          Our Foundation
-        </span>
+        
       </div>
 
       <h1

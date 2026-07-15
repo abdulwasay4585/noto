@@ -122,9 +122,7 @@ export default function StudyGroups() {
       <div className="mb-10">
         <div className="flex items-center gap-2 mb-3">
           <Users size={14} style={{ color: 'var(--noto-primary)' }} />
-          <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--noto-primary)' }}>
-            Community
-          </span>
+          
         </div>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-3"
           style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
@@ -312,8 +310,7 @@ export default function StudyGroups() {
             style={{ backgroundColor: 'var(--noto-surface)', borderColor: 'var(--noto-border)' }}>
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <div className="flex-1">
-                <p className="text-xs font-semibold uppercase tracking-widest mb-1"
-                  style={{ color: 'var(--noto-primary)' }}>Study Group</p>
+                
                 <h2 className="text-2xl font-bold" style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
                   {groupData.group.name}
                 </h2>

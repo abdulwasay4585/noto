@@ -67,9 +67,7 @@ export default function Flashcards() {
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-2">
           <Layers size={15} style={{ color: 'var(--noto-primary)' }} />
-          <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--noto-primary)' }}>
-            Spaced Repetition
-          </span>
+          
         </div>
         <h1 className="text-4xl font-bold tracking-tight"
           style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
@@ -152,10 +150,7 @@ export default function Flashcards() {
                   }}
                 >
                   {current.topic && (
-                    <span className="text-[10px] font-semibold uppercase tracking-widest mb-4"
-                      style={{ color: 'var(--noto-primary)' }}>
-                      {current.topic}
-                    </span>
+                    
                   )}
                   <p className="text-lg font-semibold leading-snug"
                     style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>

@@ -5,6 +5,7 @@ import {
   Plus, Pencil, Trash2, X, Tag, Search, ExternalLink,
   ImageOff, AlertCircle,
 } from 'lucide-react';
+import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 import { parseDriveUrl } from '../../lib/gdrive';
 import {
@@ -167,18 +168,19 @@ export default function ResourceManager() {
     if (!confirm('Permanently delete this resource?')) return;
     try {
       await deleteResource(id);
+      toast.success('Resource deleted successfully');
       loadData();
     } catch (err: any) {
-      alert('Delete failed: ' + (err.message ?? 'Unknown error'));
+      toast.error('Delete failed: ' + (err.message ?? 'Unknown error'));
     }
   };
 
   const handleTag = async (id: number) => {
     try {
       await tagResource(id);
-      alert('Resource tagged successfully');
+      toast.success('Resource tagged successfully');
     } catch {
-      alert('Tagging failed');
+      toast.error('Tagging failed');
     }
   };
 

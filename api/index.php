@@ -1432,6 +1432,6 @@ try {
     sendError("API route not found", 404);
 } catch (Exception $e) {
     error_log($e->getMessage());
-    sendError($e->getMessage(), 500);
+    sendError("Internal Server Error", 500);
 }
 

@@ -131,9 +131,7 @@ export default function StudyChat() {
         <div>
           <div className="flex items-center gap-2 mb-2">
             <Sparkles size={16} style={{ color: 'var(--noto-primary)' }} />
-            <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--noto-primary)' }}>
-              AI Study Chat
-            </span>
+            
           </div>
           <h1
             className="text-3xl md:text-4xl font-bold"

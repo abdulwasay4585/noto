@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
+import { Toaster } from 'react-hot-toast';
 import Layout from './components/Layout';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import Home from './pages/Home';
@@ -153,6 +154,7 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <Router>
+      <Toaster position="top-right" />
       <AnimatedRoutes />
     </Router>
   );

@@ -59,9 +59,7 @@ export default function HelpCenter() {
       <div className="text-center mb-14">
         <div className="flex items-center justify-center gap-2 mb-2">
           <HelpCircle size={15} style={{ color: 'var(--noto-primary)' }} />
-          <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--noto-primary)' }}>
-            Support
-          </span>
+          
         </div>
         <h1 className="text-4xl font-bold mb-3"
           style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>

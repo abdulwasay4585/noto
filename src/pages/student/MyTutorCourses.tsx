@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { BookOpen, Video, FileText, Loader2, ExternalLink, Lock, CheckCircle, PlusCircle } from 'lucide-react';
+import toast from 'react-hot-toast';
 import { fetchMyCourses, fetchAvailableCourses, fetchCourseVideos, fetchCourseReadings, studentEnroll } from '../../api';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 
@@ -67,8 +68,9 @@ export default function MyTutorCourses() {
       await studentEnroll(courseId);
       await loadCourses(); // refresh
       setActiveTab('enrolled');
+      toast.success('Successfully enrolled!');
     } catch (e: any) {
-      alert(e.message || 'Error enrolling');
+      toast.error(e.message || 'Error enrolling');
     }
   };
 

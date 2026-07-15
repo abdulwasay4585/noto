@@ -4,6 +4,7 @@ import {
   ShieldCheck, Plus, Pencil, Trash2, X, Upload, Lock, Eye, EyeOff,
   CheckCircle, XCircle, Tag, FileStack,
 } from 'lucide-react';
+import toast from 'react-hot-toast';
 import {
   fetchResources, fetchCategories, fetchSubjects,
   addResource, updateResource, deleteResource, tagResource,
@@ -94,16 +95,22 @@ export default function AdminDashboard() {
       setIsModalOpen(false);
       setEditingId(null);
       setFormData(defaultForm);
+      toast.success(editingId ? 'Updated successfully!' : 'Added successfully!');
       loadData();
     } catch {
-      alert('Action failed. Is the backend running?');
+      toast.error('Action failed. Is the backend running?');
     }
   };
 
   const handleDelete = async (id: number) => {
     if (confirm('Permanently delete this resource?')) {
-      await deleteResource(id);
-      loadData();
+      try {
+        await deleteResource(id);
+        toast.success('Deleted successfully!');
+        loadData();
+      } catch {
+        toast.error('Failed to delete resource');
+      }
     }
   };
 
@@ -488,7 +495,7 @@ function PastPapersAdmin({ subjects }: { subjects: any[] }) {
     <div className="flex-1 p-8 overflow-auto">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'var(--noto-primary)' }}>Archive</p>
+          
           <h1 className="text-2xl font-bold" style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>Past Papers</h1>
         </div>
       </div>
