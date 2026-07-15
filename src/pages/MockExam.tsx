@@ -129,7 +129,7 @@ export default function MockExam() {
     if (element) {
       html2pdf().set({
         margin: 15,
-        filename: `Mock_Exam_${exam?.subject_name || 'NOTO'}.pdf`,
+        filename: `Mock_Exam_${exam?.subject_name || 'NOTOO'}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -153,10 +153,6 @@ export default function MockExam() {
     >
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center gap-2 mb-2">
-          <ClipboardCheck size={15} style={{ color: 'var(--noto-primary)' }} />
-          
-        </div>
         <h1 className="text-4xl font-bold tracking-tight"
           style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
           Mock Exam
@@ -326,7 +322,7 @@ export default function MockExam() {
               }}
             >
               <span className="text-sm font-semibold" style={{ color: 'var(--noto-text-primary)' }}>
-                {exam.subject_name ?? 'Mock Exam'} — {exam.total_marks} marks
+                {exam.subject_name ?? 'Mock Exam'} - {exam.total_marks} marks
               </span>
               <div className="flex items-center gap-2">
                 <Timer size={15} style={{ color: (timeLeft ?? 999) < 300 ? 'var(--noto-danger)' : 'var(--noto-primary)' }} />
@@ -453,7 +449,7 @@ export default function MockExam() {
                   {Math.round(result.score_pct ?? 0)}%
                 </p>
                 <div className="mt-4 text-sm prose prose-sm dark:prose-invert mx-auto text-left" style={{ color: 'var(--noto-text-secondary)' }}>
-                  <MarkdownRenderer content={result.overall_feedback ?? 'Keep practising — review weak areas.'} />
+                  <MarkdownRenderer content={result.overall_feedback ?? 'Keep practising - review weak areas.'} />
                 </div>
               </div>
 

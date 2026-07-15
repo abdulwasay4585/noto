@@ -62,7 +62,7 @@ function MetadataPanel({ entry }: { entry: ActivityEntry }) {
     return (
       <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--noto-danger)' }}>
         <AlertTriangle size={13} />
-        Intern attempted to delete this {entry.entity_type} — blocked by server policy.
+        Intern attempted to delete this {entry.entity_type} - blocked by server policy.
       </div>
     );
   }

@@ -46,8 +46,8 @@ export default function SignIn() {
     >
       <div className="absolute top-8 left-8">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold tracking-tighter" style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-primary)' }}>
-          <img src="/logo.png" alt="NOTO Logo" className="w-8 h-8 object-contain" />
-          NOTO
+          <img src="/logo.png" alt="NOTOO Logo" className="w-8 h-8 object-contain" />
+          NOTOO
         </Link>
       </div>
 

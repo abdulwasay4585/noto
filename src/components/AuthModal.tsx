@@ -81,7 +81,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
                   {isLogin ? 'Welcome back' : 'Create an account'}
                 </h2>
                 <p className="text-sm mt-2" style={{ color: 'var(--noto-text-secondary)' }}>
-                  {isLogin ? 'Enter your details to access your dashboard' : 'Join NOTO to save study materials and progress'}
+                  {isLogin ? 'Enter your details to access your dashboard' : 'Join NOTOO to save study materials and progress'}
                 </p>
               </div>
 

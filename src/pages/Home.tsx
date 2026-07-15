@@ -45,7 +45,7 @@ export default function Home() {
         setCategories(cats);
         setRecentResources(res.data);
       } catch {
-        // graceful — backend may not be running
+        // graceful - backend may not be running
       } finally {
         setLoading(false);
       }
@@ -178,17 +178,8 @@ export default function Home() {
                     (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                   }}
                 >
-                  <div
-                    className="w-12 h-12 rounded-[var(--noto-radius-md)] flex items-center justify-center mb-6 transition-colors duration-300"
-                    style={{
-                      backgroundColor: 'var(--noto-surface-alt)',
-                      color: 'var(--noto-primary)',
-                    }}
-                  >
-                    <Icon size={22} />
-                  </div>
                   <h3
-                    className="text-xl font-semibold mb-2 transition-colors duration-200"
+                    className="text-2xl font-bold mb-3 transition-colors duration-200 pt-2"
                     style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}
                   >
                     {cat.name}
@@ -307,14 +298,8 @@ export default function Home() {
                   (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                 }}
               >
-                <div
-                  className="w-10 h-10 rounded-[var(--noto-radius-sm)] flex items-center justify-center mb-4"
-                  style={{ backgroundColor: 'var(--noto-surface-alt)', color: 'var(--noto-primary)' }}
-                >
-                  <Icon size={19} />
-                </div>
                 <h3
-                  className="font-semibold text-base mb-1.5"
+                  className="font-bold text-lg mb-2 pt-1"
                   style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}
                 >
                   {label}
@@ -363,7 +348,7 @@ export default function Home() {
               Ready to <span style={{ color: 'var(--noto-accent)' }}>Excel?</span>
             </h2>
             <p className="text-base md:text-lg mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
-              Join thousands of students who rely on NOTO to prepare smarter and perform better.
+              Join thousands of students who rely on NOTOO to prepare smarter and perform better.
             </p>
             <Link
               to="/resources"

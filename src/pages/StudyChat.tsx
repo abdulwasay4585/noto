@@ -129,10 +129,6 @@ export default function StudyChat() {
       {/* Header */}
       <div className="mb-8 flex justify-between items-start">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <Sparkles size={16} style={{ color: 'var(--noto-primary)' }} />
-            
-          </div>
           <h1
             className="text-3xl md:text-4xl font-bold"
             style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}
@@ -140,7 +136,7 @@ export default function StudyChat() {
             Ask Your Library
           </h1>
           <p className="mt-1.5 text-sm" style={{ color: 'var(--noto-text-secondary)' }}>
-            Ask anything — get grounded answers sourced directly from your study archive.
+            Ask anything and get grounded answers sourced directly from your study archive.
           </p>
         </div>
         <button
@@ -158,26 +154,7 @@ export default function StudyChat() {
         </button>
       </div>
 
-      {/* Backend unavailable banner */}
-      {backendAvailable === false && (
-        <div
-          className="flex items-start gap-3 p-4 rounded-[var(--noto-radius-md)] border mb-6 text-sm"
-          style={{
-            backgroundColor: 'var(--noto-warning)' + '18',
-            borderColor: 'var(--noto-warning)',
-            color: 'var(--noto-text-primary)',
-          }}
-        >
-          <AlertCircle size={16} className="mt-0.5 shrink-0" style={{ color: 'var(--noto-warning)' }} />
-          <div>
-            <p className="font-semibold mb-0.5">Backend not connected</p>
-            <p style={{ color: 'var(--noto-text-secondary)' }}>
-              The RAG chat API requires the PHP backend and vector embeddings to be running.
-              Start Docker to enable this feature.
-            </p>
-          </div>
-        </div>
-      )}
+
 
       {/* Messages area */}
       <div

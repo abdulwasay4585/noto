@@ -115,7 +115,7 @@ function PermGrid({ perms, onChange }: {
         </tbody>
       </table>
       <p className="px-3 py-2 text-[11px] border-t" style={{ borderColor: 'var(--noto-border)', color: 'var(--noto-text-secondary)', backgroundColor: 'var(--noto-surface-alt)' }}>
-        Delete is never granted to interns — enforced at the server level.
+        Delete is never granted to interns - enforced at the server level.
       </p>
     </div>
   );

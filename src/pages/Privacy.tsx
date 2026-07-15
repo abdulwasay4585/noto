@@ -26,14 +26,14 @@ export default function Privacy() {
         <section>
           <h2 className="text-xl font-semibold mb-3" style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>2. How We Use Your Information</h2>
           <p>
-            We use the information we collect to provide, maintain, and improve our services, to develop new features, and to protect NOTO and our users.
+            We use the information we collect to provide, maintain, and improve our services, to develop new features, and to protect NOTOO and our users.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold mb-3" style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>3. Information Sharing and Disclosure</h2>
           <p>
-            We do not share your personal information with companies, organizations, or individuals outside of NOTO except in the following cases:
+            We do not share your personal information with companies, organizations, or individuals outside of NOTOO except in the following cases:
           </p>
           <ul className="list-disc pl-6 mt-4 space-y-2">
             <li>With your consent;</li>
@@ -45,7 +45,7 @@ export default function Privacy() {
         <section>
           <h2 className="text-xl font-semibold mb-3" style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>4. Data Security</h2>
           <p>
-            We work hard to protect NOTO and our users from unauthorized access to or unauthorized alteration, disclosure, or destruction of information we hold.
+            We work hard to protect NOTOO and our users from unauthorized access to or unauthorized alteration, disclosure, or destruction of information we hold.
           </p>
         </section>
 

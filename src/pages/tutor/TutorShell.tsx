@@ -33,7 +33,7 @@ export default function TutorShell() {
           <GraduationCap size={18} color="white" />
         </div>
         <div>
-          <div className="text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>NOTO</div>
+          <div className="text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>NOTOO</div>
           <div className="text-[10px] font-medium" style={{ color: 'rgba(255,255,255,0.5)' }}>Tutor Panel</div>
         </div>
       </div>
@@ -96,7 +96,7 @@ export default function TutorShell() {
             <button onClick={() => setMobileOpen(true)} className="lg:hidden p-1.5 rounded-lg" style={{ color: 'var(--noto-text-secondary)' }}>
               <Menu size={20} />
             </button>
-            <span className="text-sm font-semibold" style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>NOTO Tutor</span>
+            <span className="text-sm font-semibold" style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>NOTOO Tutor</span>
           </div>
           <HeaderAvatar />
         </div>

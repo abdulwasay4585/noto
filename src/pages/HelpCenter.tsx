@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: 'Are the resources free to use?',
-    a: 'Yes. All resources listed on NOTO are free to access. We curate high-quality educational content for your convenience.',
+    a: 'Yes. All resources listed on NOTOO are free to access. We curate high-quality educational content for your convenience.',
   },
   {
     q: 'How does AI summarisation work?',
@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     q: 'Can I contribute my own notes?',
-    a: 'A community contribution system is coming — use the submit workflow when it launches. Admin-approved submissions will appear in the library.',
+    a: 'A community contribution system is coming - use the submit workflow when it launches. Admin-approved submissions will appear in the library.',
   },
   {
     q: 'What is the AI Study Chat?',

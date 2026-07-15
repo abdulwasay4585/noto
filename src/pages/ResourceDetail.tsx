@@ -256,9 +256,8 @@ export default function ResourceDetail() {
                       <MarkdownRenderer content={resource.ai_summary} />
                     </div>
                   </div>
-                  </div>
-                </motion.div>
-              )}
+                  </motion.div>
+                )}
             </AnimatePresence>
           </div>
         </div>

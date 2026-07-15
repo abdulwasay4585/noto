@@ -7,7 +7,7 @@ export default function TutoringLanding() {
   const { user } = useAuth();
 
   const getStudentPath = () => {
-    if (!user) return '/login';
+    if (!user) return '/signup';
     if (user.role === 'student' || user.role === 'admin') return '/my-tutor';
     return '/'; // fallback
   };
@@ -18,15 +18,12 @@ export default function TutoringLanding() {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-sm font-semibold border"
-              style={{ backgroundColor: 'var(--noto-surface-alt)', borderColor: 'var(--noto-border)', color: 'var(--noto-text-secondary)' }}>
-              <Star size={16} style={{ color: '#f59e0b' }} fill="#f59e0b" /> NOTO Tutoring
-            </div>
+            
             <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
               Connect. Learn. <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}>Succeed.</span>
             </h1>
             <p className="text-lg md:text-xl leading-relaxed mb-10" style={{ color: 'var(--noto-text-secondary)' }}>
-              Whether you want to share your expertise and earn as a tutor, or master new subjects with personalized guidance as a student, NOTO connects you seamlessly.
+              Whether you want to share your expertise and earn as a tutor, or master new subjects with personalized guidance as a student, NOTOO connects you seamlessly.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

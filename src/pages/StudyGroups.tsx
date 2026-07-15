@@ -120,10 +120,7 @@ export default function StudyGroups() {
     >
       {/* ── Header ─────────────────────────────────────────────────── */}
       <div className="mb-10">
-        <div className="flex items-center gap-2 mb-3">
-          <Users size={14} style={{ color: 'var(--noto-primary)' }} />
-          
-        </div>
+
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-3"
           style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
           Study Groups
@@ -225,7 +222,7 @@ export default function StudyGroups() {
               Create a New Group
             </h2>
             <p className="text-xs mb-7" style={{ color: 'var(--noto-text-secondary)' }}>
-              A unique invite code will be generated — share it with anyone you want to study with.
+              A unique invite code will be generated - share it with anyone you want to study with.
             </p>
             <form onSubmit={handleCreate} className="space-y-5">
               <div>

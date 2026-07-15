@@ -9,13 +9,13 @@ import { toggleTheme, getTheme } from '../lib/theme';
 import AuthModal from './AuthModal';
 import HeaderAvatar from './HeaderAvatar';
 
-// ─── NOTO Logo SVG ─────────────────────────────────────────────────────────
+// ─── NOTOO Logo SVG ─────────────────────────────────────────────────────────
 // Blue rounded shape with one squared corner (top-left), cream vertical bars
 function NotoMark({ size = 32 }: { size?: number }) {
   return (
     <img 
       src="/logo.png" 
-      alt="NOTO Logo" 
+      alt="NOTOO Logo" 
       width={size} 
       height={size} 
       style={{ objectFit: 'contain' }}
@@ -90,11 +90,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     >
       {/* ── Navbar ─────────────────────────────────────────────────────────── */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-md' : ''}`}
         style={{
           backgroundColor: scrolled ? 'var(--noto-surface)' : 'var(--noto-surface)',
-          borderBottom: scrolled ? '1px solid var(--noto-border)' : '1px solid var(--noto-border)',
-          boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.08)' : 'none',
+          opacity: scrolled ? 0.95 : 1,
+          borderBottom: scrolled ? '1px solid var(--noto-border)' : '1px solid transparent',
+          boxShadow: scrolled ? '0 4px 30px rgba(0, 0, 0, 0.1)' : 'none',
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -109,7 +110,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 className="text-xl font-bold tracking-wide hidden sm:block"
                 style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-primary)' }}
               >
-                NOTO
+                NOTOO
               </span>
             </Link>
 
@@ -381,17 +382,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           borderColor: 'var(--noto-border)',
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-10 mb-10">
             {/* Brand */}
-            <div className="md:col-span-2">
+            <div className="col-span-2 md:col-span-2">
               <Link to="/" className="flex items-center gap-2.5 mb-4">
                 <NotoMark size={28} />
                 <span
                   className="text-lg font-bold"
                   style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-primary)' }}
                 >
-                  NOTO
+                  NOTOO
                 </span>
               </Link>
               <p
@@ -433,7 +434,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </ul>
             </div>
 
-            {/* Study Tools + Info */}
+            {/* Study Tools */}
             <div>
               <h4
                 className="text-xs font-semibold uppercase tracking-wider mb-4"
@@ -441,27 +442,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               >
                 Study Tools
               </h4>
-              <ul className="space-y-2.5 text-sm mb-6" style={{ color: 'var(--noto-text-secondary)' }}>
-                {[
-                  ['AI Chat', '/chat'],
-                  ['Roadmap', '/roadmap'],
-                  ['Flashcards', '/flashcards'],
-                  ['Mock Exam', '/mock-exam'],
-                ].map(([label, path]) => (
-                  <li key={path}>
+              <ul className="space-y-2.5 text-sm" style={{ color: 'var(--noto-text-secondary)' }}>
+                {toolsNav.map((item) => (
+                  <li key={item.path}>
                     <Link
-                      to={path}
+                      to={item.path}
                       className="hover:underline transition-colors"
                       style={{ color: 'var(--noto-text-secondary)' }}
                       onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--noto-primary)'}
                       onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--noto-text-secondary)'}
                     >
-                      {label}
+                      {item.name}
                     </Link>
                   </li>
                 ))}
               </ul>
+            </div>
 
+            {/* Company */}
+            <div>
               <h4
                 className="text-xs font-semibold uppercase tracking-wider mb-4"
                 style={{ color: 'var(--noto-text-primary)' }}
@@ -474,6 +473,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <li key={path}>
                       <Link
                         to={path}
+                        className="hover:underline transition-colors"
                         style={{ color: 'var(--noto-text-secondary)' }}
                         onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--noto-primary)'}
                         onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--noto-text-secondary)'}
@@ -492,7 +492,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             className="flex flex-col sm:flex-row items-center justify-between pt-8 border-t gap-4 text-xs"
             style={{ borderColor: 'var(--noto-border)', color: 'var(--noto-text-secondary)' }}
           >
-            <p>© {new Date().getFullYear()} NOTO Foundation. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} NOTOO Foundation. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <button
                 onClick={handleToggleTheme}

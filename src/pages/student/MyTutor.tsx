@@ -1,4 +1,4 @@
-// src/pages/student/MyTutor.tsx — Student hub: announcements + overview
+// src/pages/student/MyTutor.tsx - Student hub: announcements + overview
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';

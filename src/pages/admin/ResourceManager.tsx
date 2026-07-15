@@ -404,7 +404,7 @@ export default function ResourceManager() {
 
                 <Field
                   label="Google Drive URL"
-                  hint="Paste any Drive sharing URL — thumbnail will auto-fill. File must be 'Anyone with link can view'."
+                  hint="Paste any Drive sharing URL - thumbnail will auto-fill. File must be 'Anyone with link can view'."
                 >
                   <Input
                     value={formData.google_drive_url}
@@ -426,7 +426,7 @@ export default function ResourceManager() {
                         (e.currentTarget.parentElement as HTMLElement).innerHTML =
                           `<div class="flex flex-col items-center justify-center h-36 gap-2" style="color:var(--noto-text-secondary)">
                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                             <span style="font-size:12px">Thumbnail unavailable — check Drive sharing settings</span>
+                             <span style="font-size:12px">Thumbnail unavailable - check Drive sharing settings</span>
                            </div>`;
                       }}
                     />
@@ -440,7 +440,7 @@ export default function ResourceManager() {
                     style={{ backgroundColor: 'color-mix(in srgb, var(--noto-warning) 10%, transparent)', color: 'var(--noto-warning)' }}
                   >
                     <AlertCircle size={13} />
-                    Could not parse Drive URL — thumbnail will not auto-fill
+                    Could not parse Drive URL - thumbnail will not auto-fill
                   </div>
                 ) : null}
 

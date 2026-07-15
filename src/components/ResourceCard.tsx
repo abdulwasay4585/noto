@@ -34,9 +34,9 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
-      whileHover={{ y: -4 }}
+      whileHover={{ y: -4, boxShadow: '0 12px 32px rgba(0, 0, 0, 0.08)' }}
       transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-      className="group relative overflow-hidden rounded-[var(--noto-radius-lg)] border"
+      className="group relative overflow-hidden rounded-[var(--noto-radius-xl)] border transition-all duration-300"
       style={{
         backgroundColor: 'var(--noto-surface)',
         borderColor: 'var(--noto-border)',
@@ -74,15 +74,7 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
             </span>
           </div>
 
-          {/* Type icon */}
-          <div className="absolute bottom-3 right-3">
-            <div
-              className="p-2 rounded-lg shadow-sm"
-              style={{ backgroundColor: 'var(--noto-accent)', color: 'var(--noto-accent-text)' }}
-            >
-              <TypeIcon size={16} />
-            </div>
-          </div>
+
         </div>
 
         {/* Body */}

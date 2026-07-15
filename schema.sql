@@ -1,12 +1,24 @@
--- schema.sql
+-- schema.sql (Unified Database Schema)
 
 CREATE EXTENSION IF NOT EXISTS vector;
+
+-- ─── Core Users ─────────────────────────────────────────────────────────────
 
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   email VARCHAR(255) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
-  role VARCHAR(50) CHECK(role IN ('admin', 'student')) DEFAULT 'student',
+  role VARCHAR(50) CHECK(role IN ('admin', 'student', 'intern', 'tutor')) DEFAULT 'student',
+  username VARCHAR(50),
+  first_name VARCHAR(100),
+  last_name VARCHAR(100),
+  phone_number VARCHAR(50),
+  is_active BOOLEAN DEFAULT TRUE,
+  created_by INT REFERENCES users(id),
+  last_login TIMESTAMP,
+  last_seen TIMESTAMP,
+  must_change_password BOOLEAN DEFAULT FALSE,
+  terms_accepted BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -17,6 +29,13 @@ CREATE TABLE IF NOT EXISTS sessions (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS student_last_online (
+  user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+  last_seen TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ─── Resources & Categories ─────────────────────────────────────────────────
 
 CREATE TABLE IF NOT EXISTS categories (
   id SERIAL PRIMARY KEY,
@@ -43,6 +62,8 @@ CREATE TABLE IF NOT EXISTS resources (
   topic_tags TEXT[] DEFAULT '{}',
   difficulty_level VARCHAR(20),
   embedding VECTOR(768),
+  submission_status VARCHAR(20) DEFAULT 'approved',
+  submitted_by_session VARCHAR(64),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (category_id) REFERENCES categories(id),
   FOREIGN KEY (subject_id) REFERENCES subjects(id)
@@ -63,7 +84,37 @@ CREATE TABLE IF NOT EXISTS resource_tags (
   FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
 );
 
--- ─── Section 1: RAG Chat ─────────────────────────────────────────────────────
+-- ─── Intern Permissions & Activity Logs ──────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS intern_permissions (
+  id            SERIAL PRIMARY KEY,
+  user_id       INT REFERENCES users(id) ON DELETE CASCADE,
+  resource_type VARCHAR(50) NOT NULL,     
+  can_read      BOOLEAN DEFAULT TRUE,
+  can_write     BOOLEAN DEFAULT FALSE,
+  can_edit      BOOLEAN DEFAULT FALSE,
+  can_delete    BOOLEAN DEFAULT FALSE,   
+  updated_by    INT REFERENCES users(id),
+  updated_at    TIMESTAMP DEFAULT NOW(),
+  UNIQUE (user_id, resource_type)
+);
+
+CREATE TABLE IF NOT EXISTS activity_logs (
+  id           SERIAL PRIMARY KEY,
+  user_id      INT REFERENCES users(id),
+  action       VARCHAR(30)  NOT NULL,    
+  entity_type  VARCHAR(50)  NOT NULL,    
+  entity_id    INT,
+  entity_title VARCHAR(255),            
+  metadata     JSONB,                   
+  ip_address   VARCHAR(45),
+  created_at   TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS activity_logs_user_id_idx   ON activity_logs(user_id);
+CREATE INDEX IF NOT EXISTS activity_logs_created_at_idx ON activity_logs(created_at DESC);
+
+-- ─── RAG Chat ─────────────────────────────────────────────────────────────
 
 CREATE TABLE IF NOT EXISTS chat_sessions (
   id SERIAL PRIMARY KEY,
@@ -83,7 +134,7 @@ CREATE TABLE IF NOT EXISTS chat_messages (
   created_at TIMESTAMP DEFAULT NOW()
 );
 
--- ─── Section 2: Past Papers ───────────────────────────────────────────────────
+-- ─── Past Papers & Topic Frequency ──────────────────────────────────────────
 
 CREATE TABLE IF NOT EXISTS past_papers (
   id SERIAL PRIMARY KEY,
@@ -98,8 +149,6 @@ CREATE TABLE IF NOT EXISTS past_papers (
   created_at TIMESTAMP DEFAULT NOW()
 );
 
--- ─── Section 3: Topic Frequency ──────────────────────────────────────────────
-
 CREATE TABLE IF NOT EXISTS paper_questions (
   id SERIAL PRIMARY KEY,
   paper_id INTEGER REFERENCES past_papers(id) ON DELETE CASCADE,
@@ -109,7 +158,7 @@ CREATE TABLE IF NOT EXISTS paper_questions (
   extracted_text TEXT
 );
 
--- ─── Section 4: Roadmap / Study Plans ────────────────────────────────────────
+-- ─── Roadmap / Study Plans ────────────────────────────────────────────────
 
 CREATE TABLE IF NOT EXISTS study_plans (
   id SERIAL PRIMARY KEY,
@@ -133,7 +182,7 @@ CREATE TABLE IF NOT EXISTS study_plan_tasks (
   is_weak_topic BOOLEAN DEFAULT FALSE
 );
 
--- ─── Section 5: Mock Exams & Readiness ───────────────────────────────────────
+-- ─── Mock Exams & Readiness ───────────────────────────────────────────────
 
 CREATE TABLE IF NOT EXISTS mock_exams (
   id SERIAL PRIMARY KEY,
@@ -154,7 +203,7 @@ CREATE TABLE IF NOT EXISTS quiz_results (
   completed_at TIMESTAMP DEFAULT NOW()
 );
 
--- ─── Section 6: Flashcards ───────────────────────────────────────────────────
+-- ─── Flashcards ───────────────────────────────────────────────────────────
 
 CREATE TABLE IF NOT EXISTS flashcards (
   id SERIAL PRIMARY KEY,
@@ -174,12 +223,7 @@ CREATE TABLE IF NOT EXISTS flashcard_reviews (
   UNIQUE(flashcard_id, user_session_id)
 );
 
--- ─── Section 8: Crowdsourced Submission ──────────────────────────────────────
-
-ALTER TABLE resources ADD COLUMN IF NOT EXISTS submission_status VARCHAR(20) DEFAULT 'approved';
-ALTER TABLE resources ADD COLUMN IF NOT EXISTS submitted_by_session VARCHAR(64);
-
--- ─── Section 9: Study Groups ─────────────────────────────────────────────────
+-- ─── Study Groups ─────────────────────────────────────────────────────────
 
 CREATE TABLE IF NOT EXISTS study_groups (
   id SERIAL PRIMARY KEY,
@@ -197,11 +241,85 @@ CREATE TABLE IF NOT EXISTS study_group_members (
   PRIMARY KEY (group_id, user_session_id)
 );
 
--- ─── Seed Data ────────────────────────────────────────────────────────────────
+-- ─── Tutor Ecosystem ──────────────────────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS tutor_profiles (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER UNIQUE NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    bio TEXT,
+    subjects TEXT,
+    hourly_rate DECIMAL(10,2) DEFAULT 0,
+    profile_approved BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS tutor_courses (
+  id SERIAL PRIMARY KEY,
+  tutor_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  description TEXT,
+  price DECIMAL(10,2) DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS tutor_enrollments (
+  id SERIAL PRIMARY KEY,
+  tutor_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  course_id INTEGER REFERENCES tutor_courses(id) ON DELETE SET NULL,
+  fee_paid BOOLEAN DEFAULT FALSE,
+  payment_ref TEXT,
+  payment_method TEXT DEFAULT 'jazzcash',
+  payment_status TEXT DEFAULT 'pending',
+  enrolled_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(tutor_id, student_id, course_id)
+);
+
+CREATE TABLE IF NOT EXISTS tutor_videos (
+  id SERIAL PRIMARY KEY,
+  course_id INTEGER NOT NULL REFERENCES tutor_courses(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  youtube_url TEXT NOT NULL,
+  description TEXT,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS tutor_readings (
+  id SERIAL PRIMARY KEY,
+  course_id INTEGER NOT NULL REFERENCES tutor_courses(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  content TEXT,
+  file_url TEXT,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS tutor_classes (
+  id SERIAL PRIMARY KEY,
+  tutor_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  course_id INTEGER REFERENCES tutor_courses(id) ON DELETE SET NULL,
+  title TEXT NOT NULL,
+  description TEXT,
+  platform TEXT DEFAULT 'zoom',
+  meeting_link TEXT NOT NULL,
+  scheduled_at TIMESTAMPTZ NOT NULL,
+  duration_minutes INTEGER DEFAULT 60,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS tutor_announcements (
+  id SERIAL PRIMARY KEY,
+  tutor_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  course_id INTEGER REFERENCES tutor_courses(id) ON DELETE SET NULL,
+  title TEXT NOT NULL,
+  body TEXT,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ─── Seed Data ────────────────────────────────────────────────────────────
 
 -- Insert default admin (password: noto-admin)
-INSERT INTO users (email, password_hash, role) 
-VALUES ('admin@noto.com', '$2y$12$uqpJEqnGQbA3O17Mrq6of.KQLTCLKK98Acu9P2dUhAuLpSvj2U3Ju', 'admin') 
+INSERT INTO users (email, password_hash, role, username) 
+VALUES ('admin@noto.com', '$2y$12$uqpJEqnGQbA3O17Mrq6of.KQLTCLKK98Acu9P2dUhAuLpSvj2U3Ju', 'admin', 'admin') 
 ON CONFLICT DO NOTHING;
 
 INSERT INTO categories (name) VALUES ('O Level'), ('A Level'), ('SAT') ON CONFLICT DO NOTHING;
@@ -224,4 +342,3 @@ BEGIN
   INSERT INTO subjects (name, category_id) VALUES ('Math', sat_id) ON CONFLICT DO NOTHING;
   INSERT INTO subjects (name, category_id) VALUES ('Reading & Writing', sat_id) ON CONFLICT DO NOTHING;
 END $$;
-

@@ -75,10 +75,6 @@ export default function ReadinessDashboard() {
     >
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center gap-2 mb-2">
-          <BarChart3 size={15} style={{ color: 'var(--noto-primary)' }} />
-          
-        </div>
         <h1 className="text-4xl font-bold tracking-tight"
           style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
           Readiness Dashboard
@@ -88,29 +84,26 @@ export default function ReadinessDashboard() {
         </p>
       </div>
 
-      {/* Backend unavailable */}
-      {error && !loading && (
-        <div className="flex items-start gap-3 p-4 rounded-[var(--noto-radius-md)] border mb-6 text-sm"
-          style={{ backgroundColor: 'var(--noto-warning)' + '18', borderColor: 'var(--noto-warning)', color: 'var(--noto-text-primary)' }}>
-          <AlertCircle size={16} className="mt-0.5 shrink-0" style={{ color: 'var(--noto-warning)' }} />
-          <div>
-            <p className="font-semibold">Backend not connected</p>
-            <p style={{ color: 'var(--noto-text-secondary)' }}>
-              Readiness data requires mock exam results and the backend to be running.
-              Complete some mock exams first to see your progress.
-            </p>
-          </div>
-        </div>
-      )}
+
 
       {loading ? (
         <div className="flex justify-center py-20">
           <Loader2 size={28} className="animate-spin" style={{ color: 'var(--noto-primary)', opacity: 0.4 }} />
         </div>
+      ) : error ? (
+        <div className="text-center py-20 rounded-[var(--noto-radius-xl)] border"
+          style={{ backgroundColor: 'var(--noto-surface)', borderColor: 'var(--noto-border)' }}>
+          <h3 className="font-semibold mb-2"
+            style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
+            Connection Error
+          </h3>
+          <p className="text-sm" style={{ color: 'var(--noto-text-secondary)' }}>
+            Unable to connect to the backend. Please ensure the server is running.
+          </p>
+        </div>
       ) : data.length === 0 ? (
         <div className="text-center py-20 rounded-[var(--noto-radius-xl)] border"
           style={{ backgroundColor: 'var(--noto-surface)', borderColor: 'var(--noto-border)' }}>
-          <BarChart3 size={32} className="mx-auto mb-4" style={{ color: 'var(--noto-text-secondary)', opacity: 0.4 }} />
           <h3 className="font-semibold mb-2"
             style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
             No data yet

@@ -47,10 +47,6 @@ export default function PastPapers() {
     >
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center gap-2 mb-2">
-          <FileStack size={15} style={{ color: 'var(--noto-primary)' }} />
-          
-        </div>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight"
           style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
           Past Papers
@@ -109,19 +105,7 @@ export default function PastPapers() {
         </div>
       </div>
 
-      {/* Backend banner */}
-      {error && (
-        <div
-          className="flex items-start gap-3 p-4 rounded-[var(--noto-radius-md)] border mb-6 text-sm"
-          style={{ backgroundColor: 'var(--noto-warning)' + '18', borderColor: 'var(--noto-warning)', color: 'var(--noto-text-primary)' }}
-        >
-          <AlertCircle size={16} className="mt-0.5 shrink-0" style={{ color: 'var(--noto-warning)' }} />
-          <div>
-            <p className="font-semibold mb-0.5">Backend not connected</p>
-            <p style={{ color: 'var(--noto-text-secondary)' }}>Past papers require the PHP backend + PostgreSQL to be running via Docker.</p>
-          </div>
-        </div>
-      )}
+
 
       {/* Table */}
       {loading ? (

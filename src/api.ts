@@ -1,4 +1,4 @@
-// src/api.ts — Centralized fetch client for all NOTO API endpoints
+// src/api.ts — Centralized fetch client for all NOTOO API endpoints
 
 const getAuthHeaders = (extra: Record<string, string> = {}) => {
   const token = localStorage.getItem('noto_token');

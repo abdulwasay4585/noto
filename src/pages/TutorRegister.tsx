@@ -47,7 +47,7 @@ export default function TutorRegister() {
           <h1 className="text-2xl font-bold" style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
             Become a Tutor
           </h1>
-          <p className="text-sm mt-1" style={{ color: 'var(--noto-text-secondary)' }}>Create your tutor account on NOTO</p>
+          <p className="text-sm mt-1" style={{ color: 'var(--noto-text-secondary)' }}>Create your tutor account on NOTOO</p>
         </div>
 
         <div className="p-8 rounded-2xl border" style={{ backgroundColor: 'var(--noto-surface)', borderColor: 'var(--noto-border)' }}>

@@ -68,14 +68,14 @@ export default function AdminShell() {
       >
         {/* Logo mark */}
         <div className="flex items-center justify-center w-8 h-8 shrink-0">
-          <img src="/logo.png" alt="NOTO Logo" className="w-full h-full object-contain" />
+          <img src="/logo.png" alt="NOTOO Logo" className="w-full h-full object-contain" />
         </div>
         <div>
           <div
             className="text-sm font-bold text-white leading-tight"
             style={{ fontFamily: 'Space Grotesk, sans-serif' }}
           >
-            NOTO
+            NOTOO
           </div>
           <div className="text-[10px] font-medium" style={{ color: 'rgba(255,255,255,0.5)' }}>
             {user?.role === 'admin' ? 'Admin Panel' : 'Intern Portal'}
@@ -155,7 +155,7 @@ export default function AdminShell() {
               className="text-sm font-semibold"
               style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}
             >
-              NOTO Admin
+              NOTOO Admin
             </span>
           </div>
           <HeaderAvatar />

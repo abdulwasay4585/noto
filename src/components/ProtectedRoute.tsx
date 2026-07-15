@@ -12,7 +12,7 @@ function FullPageSpinner() {
       style={{ backgroundColor: 'var(--noto-background)' }}
     >
       <div className="flex flex-col items-center gap-4">
-        {/* NOTO logo mark animation */}
+        {/* NOTOO logo mark animation */}
         <div className="flex items-end gap-1.5">
           {[0, 1, 2].map(i => (
             <div

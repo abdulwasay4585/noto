@@ -65,10 +65,6 @@ export default function Flashcards() {
     >
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center gap-2 mb-2">
-          <Layers size={15} style={{ color: 'var(--noto-primary)' }} />
-          
-        </div>
         <h1 className="text-4xl font-bold tracking-tight"
           style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
           Flashcards
@@ -83,17 +79,16 @@ export default function Flashcards() {
           <Loader2 size={28} className="animate-spin" style={{ color: 'var(--noto-primary)', opacity: 0.4 }} />
         </div>
       )}
-
-      {!loading && error && (
-        <div className="flex items-start gap-3 p-4 rounded-[var(--noto-radius-md)] border text-sm"
-          style={{ backgroundColor: 'var(--noto-warning)' + '18', borderColor: 'var(--noto-warning)', color: 'var(--noto-text-primary)' }}>
-          <AlertCircle size={16} className="mt-0.5 shrink-0" style={{ color: 'var(--noto-warning)' }} />
-          <div>
-            <p className="font-semibold">Backend not connected</p>
-            <p style={{ color: 'var(--noto-text-secondary)' }}>
-              Flashcards are generated from AI summaries and require the backend to run.
-            </p>
-          </div>
+      {error && !loading && (
+        <div className="text-center py-20 rounded-[var(--noto-radius-xl)] border"
+          style={{ backgroundColor: 'var(--noto-surface)', borderColor: 'var(--noto-border)' }}>
+          <h3 className="font-semibold mb-2"
+            style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
+            Connection Error
+          </h3>
+          <p className="text-sm" style={{ color: 'var(--noto-text-secondary)' }}>
+            Unable to connect to the backend. Please ensure the server is running.
+          </p>
         </div>
       )}
 
@@ -128,7 +123,7 @@ export default function Flashcards() {
             </div>
           </div>
 
-          {/* Flashcard — click to flip */}
+          {/* Flashcard - click to flip */}
           <div
             className="relative cursor-pointer select-none"
             style={{ perspective: 1000 }}
@@ -136,7 +131,7 @@ export default function Flashcards() {
           >
             <AnimatePresence mode="wait">
               {!flipped ? (
-                // Front — surface color per design.md §7
+                // Front - surface color per design.md §7
                 <motion.div
                   key="front"
                   initial={{ rotateY: -90, opacity: 0 }}
@@ -159,7 +154,7 @@ export default function Flashcards() {
                   </p>
                 </motion.div>
               ) : (
-                // Back — primary-light tint per design.md §7
+                // Back - primary-light tint per design.md §7
                 <motion.div
                   key="back"
                   initial={{ rotateY: -90, opacity: 0 }}
@@ -182,7 +177,7 @@ export default function Flashcards() {
             </AnimatePresence>
           </div>
 
-          {/* Review buttons — only show when flipped */}
+          {/* Review buttons - only show when flipped */}
           <AnimatePresence>
             {flipped && (
               <motion.div

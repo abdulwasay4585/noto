@@ -79,10 +79,6 @@ export default function Roadmap() {
     >
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center gap-2 mb-2">
-          <Map size={15} style={{ color: 'var(--noto-primary)' }} />
-          
-        </div>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight"
           style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--noto-text-primary)' }}>
           Smart Roadmap
@@ -181,7 +177,7 @@ export default function Roadmap() {
               </div>
               {subjects.length === 0 && (
                 <p className="text-xs mt-2" style={{ color: 'var(--noto-text-secondary)' }}>
-                  Subjects load from the backend — ensure Docker is running.
+                  Subjects load from the backend - ensure Docker is running.
                 </p>
               )}
             </div>
