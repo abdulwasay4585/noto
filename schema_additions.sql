@@ -67,3 +67,30 @@ ALTER TABLE users
 ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check;
 ALTER TABLE users ADD CONSTRAINT users_role_check
   CHECK (role IN ('admin', 'student', 'intern', 'tutor'));
+CREATE TABLE IF NOT EXISTS tutor_profiles (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER UNIQUE NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    bio TEXT,
+    subjects TEXT,
+    hourly_rate DECIMAL(10,2) DEFAULT 0,
+    profile_approved BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS tutor_classes (
+    id SERIAL PRIMARY KEY,
+    tutor_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    schedule TEXT,
+    price DECIMAL(10,2) DEFAULT 0,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS tutor_enrollments (
+    id SERIAL PRIMARY KEY,
+    class_id INTEGER NOT NULL REFERENCES tutor_classes(id) ON DELETE CASCADE,
+    student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    enrolled_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(class_id, student_id)
+);
