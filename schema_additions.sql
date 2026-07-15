@@ -55,3 +55,15 @@ CREATE INDEX IF NOT EXISTS activity_logs_created_at_idx ON activity_logs(created
 -- ─── 4. Admin user: set username ───────────────────────────────────────────
 -- Run this to give the admin a proper username for login:
 -- UPDATE users SET username = 'admin' WHERE email = 'admin@noto.com';
+
+-- Added for expanded user profile on signup
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS first_name VARCHAR(100),
+  ADD COLUMN IF NOT EXISTS last_name VARCHAR(100),
+  ADD COLUMN IF NOT EXISTS phone_number VARCHAR(50),
+  ADD COLUMN IF NOT EXISTS terms_accepted BOOLEAN DEFAULT FALSE;
+
+-- Ensure tutor and intern roles are allowed
+ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check;
+ALTER TABLE users ADD CONSTRAINT users_role_check
+  CHECK (role IN ('admin', 'student', 'intern', 'tutor'));
