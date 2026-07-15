@@ -163,7 +163,6 @@ export default function ReadinessDashboard() {
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={data} margin={{ top: 4, right: 16, left: 0, bottom: 60 }}>
                 <CartesianGrid
-                  strokeDasharray="3 3"
                   stroke="var(--noto-border)"
                   vertical={false}
                 />

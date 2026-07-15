@@ -71,20 +71,7 @@ export default function Home() {
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 md:py-36 text-center">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-8"
-            style={{
-              backgroundColor: 'rgba(242, 234, 211, 0.15)',
-              color: 'var(--noto-accent)',
-              border: '1px solid rgba(242, 234, 211, 0.25)',
-            }}
-          >
-            Academic Excellence, Rethought
-          </motion.div>
+
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
